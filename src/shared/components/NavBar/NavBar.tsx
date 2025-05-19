@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Navbar.css';
+import './NavBar.css';
 import logoJibe from '../../../assets/images/jibeLogo.png'; // Ajusta la ruta según donde tengas el logo
 
 const Navbar = () => {
