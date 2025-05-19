@@ -1,0 +1,107 @@
+/* Estilos básicos para la página de login */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Fondo de página completo */
+.login-background {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #f8f9fa;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Imagen de fondo con efecto overlay */
+.login-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../../../assets/images/prueba.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Contenedor principal que engloba ambos paneles */
+.container-box {
+  display: flex;
+  width: 900px;
+  max-width: 90%;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 1;
+}
+
+/* Panel izquierdo con logo */
+.left-panel {
+  background-color: #d6230c;
+  padding: 40px;
+  width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-panel img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Panel derecho con formulario */
+.right-panel {
+  width: 55%;
+  padding: 40px;
+  background-color: white;
+}
+
+/* Botón principal de acción */
+.btn-login {
+  background-color: #e41f18 !important;
+  border-color: #e41f18 !important;
+  color: rgb(255, 243, 243) !important;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+}
+
+.btn-login:hover,
+.btn-login:focus {
+  background-color: #c82333 !important;
+  border-color: #bd2130 !important;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .container-box {
+    flex-direction: column;
+    max-width: 95%;
+  }
+  
+  .left-panel {
+    width: 100%;
+    padding: 30px;
+  }
+  
+  .right-panel {
+    width: 100%;
+    padding: 30px;
+  }
+  
+  .left-panel img {
+    max-width: 200px;
+  }
+}

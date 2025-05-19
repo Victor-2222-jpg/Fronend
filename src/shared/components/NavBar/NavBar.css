@@ -1,0 +1,66 @@
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+.jibe-navbar {
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.logo-navbar {
+  height: 40px;
+  width: auto;
+}
+
+.navbar-nav .nav-link {
+  color: #333333 !important;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 8px 16px !important;
+  margin: 0 5px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #e41f18 !important;
+}
+
+.btn-join {
+  background-color: #e41f18;
+  border-color: #e41f18;
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.btn-join:hover {
+  background-color: #c81912;
+  border-color: #c81912;
+  color: white;
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 10px 0 !important;
+    margin: 0;
+  }
+  
+  .btn-join {
+    margin-top: 15px;
+    width: 100%;
+  }
+}

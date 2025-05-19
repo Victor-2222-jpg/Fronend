@@ -1,0 +1,117 @@
+.welcome-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.welcome-container h1 {
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.welcome-content {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-content p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.welcome-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.welcome-content li {
+  margin: 0.5rem 0;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.welcome-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.welcome-button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  background-color: #007bff;
+  color: white;
+}
+
+.welcome-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-button.secondary {
+  background-color: #6c757d;
+}
+
+
+.overlay-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.caption-custom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  width: 100%;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+}
+
+.section-padding {
+  padding: 80px 0;
+}
+
+.rowdies-bold {
+  font-weight: bold;
+}
+
+.about-text img {
+  max-height: 150px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.contact span {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Asegúrate de que las imágenes estén en la carpeta public/drawable/ */

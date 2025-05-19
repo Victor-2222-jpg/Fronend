@@ -1,0 +1,20 @@
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+/* Asegura que los resultados de búsqueda se muestren correctamente */
+.position-relative {
+  position: relative;
+}
+
+/* Estilo para elementos clicables en las listas */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .card {
+    margin: 1rem;
+  }
+}
