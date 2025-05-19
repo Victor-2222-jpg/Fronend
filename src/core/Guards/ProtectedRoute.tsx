@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { Navigate, useLocation, Outlet } from 'react-router-dom';
 import authService from '../services/auth.service';
 
