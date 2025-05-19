@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Navbar from './shared/components/NavBar/NavBar'
 import './App.css'
 import LoginForm from './Views/pages/Login/LoginForm'
