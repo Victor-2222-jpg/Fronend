@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Form, Button, Container, Row, Col, Alert, ListGroup } from 'react-bootstrap';
+import {  Form, Button, Alert, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
 import './Notificacion.css'; // Crearemos este archivo para algunos estilos adicionales
 

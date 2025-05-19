@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthService from '../../../core/services/auth.service';
 import './LoginForm.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
+import { Container, Form, Button, Alert } from 'react-bootstrap';
 import logoJibe from '../../../assets/images/jibe.jpg'; // Importa el logo de JIBE
 
 interface LoginData {
