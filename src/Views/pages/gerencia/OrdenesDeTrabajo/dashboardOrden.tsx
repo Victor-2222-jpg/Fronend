@@ -67,7 +67,7 @@ const DashboardOrden: React.FC = () => {
           // Vista
           showViewToggle={true}
           viewMode={viewMode as 'cards' | 'table'}
-          onViewModeChange={toggleViewMode} stateFilterValue={''} onStateFilterChange={function (value: string): void {
+          onViewModeChange={toggleViewMode} stateFilterValue={''} onStateFilterChange={function (): void {
             throw new Error('Function not implemented.');
           } } dateFromValue={''} onDateFromChange={function (): void {
             throw new Error('Function not implemented.');

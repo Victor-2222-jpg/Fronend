@@ -1,6 +1,5 @@
 
 import type { ClaseDepartamentoSubsidiaria } from "../clase_departamento_subsidiaria/clase_departamento_sunsidiaria.interface";
-import type { Subsidiaria } from "../Subsidiaria/subsidiaria.interface";
 import type { UsuarioCreador } from "../usuariocreador.interface";
 import type Comentario from "./comentario.interface";
 

@@ -36,7 +36,7 @@ const ClienteDashboard: React.FC = () => {
           showUserFilter={true}
           userOptions={userOptions}
           userFilterValue={userFilterValue}
-          onUserFilterChange={handleUserFilterChange} stateOptions={[]} stateFilterValue={''} onStateFilterChange={function (value: string): void {
+          onUserFilterChange={handleUserFilterChange} stateOptions={[]} stateFilterValue={''} onStateFilterChange={function (): void {
             throw new Error('Function not implemented.');
           } } dateFromValue={''} onDateFromChange={function (): void {
             throw new Error('Function not implemented.');

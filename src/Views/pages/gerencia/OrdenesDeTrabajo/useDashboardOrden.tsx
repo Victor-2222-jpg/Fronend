@@ -51,7 +51,10 @@ export const useDashboardOrden = () => {
         const response = await ordenService.obtenerOrdenes();
         
         // Extraer directamente ordenesTrabajo del objeto response
-        const ordenesArray = response.ordenesTrabajo || [];
+        // Si response es un array de objetos con 'ordenesTrabajo', aplanar todos
+        const ordenesArray = Array.isArray(response)
+          ? response.flatMap((item: any) => item.ordenesTrabajo || [])
+          : [];
         
         console.log('Órdenes recibidas:', ordenesArray);
         

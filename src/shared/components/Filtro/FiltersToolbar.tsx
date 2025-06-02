@@ -69,7 +69,6 @@ const FiltersToolbar: React.FC<FiltersToolbarProps> = ({
   // Estado para el buscador de usuarios
   const [userSearchTerm, setUserSearchTerm] = useState("");
   const [showUserResults, setShowUserResults] = useState(false);
-  const [setSelectedUserLabel] = useState("");
   
   // Filtrar usuarios basados en el término de búsqueda
   const filteredUsers = userSearchTerm

@@ -88,7 +88,7 @@ const OrdenAsignacionModal: React.FC<OrdenAsignacionModalProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-   const [ setIsSubmitting] = useState<boolean>(false);
+   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   
   const handleSubmit = async () => {
     if (validateForm() && orden) {
@@ -113,7 +113,7 @@ const OrdenAsignacionModal: React.FC<OrdenAsignacionModalProps> = ({
         };
         
         // Llamar al servicio para crear la orden
-        console.log('Datos de la orden a enviar:', usuarioCreador.id);
+       
         const response = await ordenService.crearOrden(ordenData);
         console.log('Orden creada exitosamente:', response);
         
@@ -243,7 +243,7 @@ const OrdenAsignacionModal: React.FC<OrdenAsignacionModalProps> = ({
         <Button 
           variant="primary" 
           onClick={handleSubmit}
-          disabled={onConfirm}
+          disabled={isLoading || isSubmitting}
         >
          Asignar Tecnicos
         </Button>

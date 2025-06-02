@@ -392,6 +392,4 @@ const toggleViewMode = useCallback(() => {
   };
 };
 
-function setFiltrosAplicados(arg0: boolean) {
-  throw new Error('Function not implemented.');
-}
+
