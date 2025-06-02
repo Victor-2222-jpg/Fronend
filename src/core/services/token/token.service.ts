@@ -1,11 +1,15 @@
 import { jwtDecode } from 'jwt-decode';
 
 interface DecodedToken {
+  id ?: string;
   sub: string;
   email: string;
-  rol: string | string[];
+  nombre: string;
+  Apellido_Paterno: string;
+  Apellido_Materno: string;
+  rol: number | number[];
   exp: number;
-  // Otros campos que pueda tener tu token
+  
 }
 
 class TokenService {
@@ -33,10 +37,48 @@ class TokenService {
     }
   }
 
-  getUserRole(): string | string[] | null {
+  getUsername(): string | null {
+    const decodedToken = this.decodeToken();
+    if (!decodedToken) return null;
+    const { nombre, Apellido_Paterno, Apellido_Materno } = decodedToken;
+    if (!nombre && !Apellido_Paterno && !Apellido_Materno) return null;
+    return [nombre, Apellido_Paterno, Apellido_Materno].filter(Boolean).join(' ');
+  }
+
+  getuserTipos(): string | null {
+    const decodedToken = this.decodeToken();
+    if (!decodedToken) return null;
+
+    const { rol } = decodedToken;
+
+    // Puedes personalizar los nombres según tus roles
+    const roleMap: Record<number, string> = {
+      1: 'Administrador',
+      2: 'Gerente',
+      3: 'Coordinador',
+      4: 'Técnico',
+      5: 'Usuario',
+      // Agrega más roles según sea necesario
+    };
+
+    if (Array.isArray(rol)) {
+      // Si hay varios roles, retorna el primero mapeado (o todos concatenados si prefieres)
+      return roleMap[rol[0]] || 'Desconocido';
+    }
+
+    return roleMap[rol] || 'Desconocido';
+  }
+
+  getUserRole(): number | string[] | null {
     const decodedToken = this.decodeToken();
     console.log('Decoded token:', decodedToken);
-    return decodedToken ? decodedToken.rol : null;
+    console.log(decodedToken?.rol);
+    if (!decodedToken) return null;
+    if (Array.isArray(decodedToken.rol)) {
+      // Convert number[] to string[]
+      return decodedToken.rol.map(String);
+    }
+    return decodedToken.rol;
   }
 
   isTokenValid(): boolean {
@@ -55,7 +97,7 @@ class TokenService {
     if (Array.isArray(userRole)) {
       return userRole.includes(requiredRole);
     }
-    return userRole === requiredRole;
+    return String(userRole) === requiredRole;
   }
 
   

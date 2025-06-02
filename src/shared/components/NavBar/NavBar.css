@@ -24,6 +24,16 @@
   transition: all 0.3s ease;
 }
 
+.user-welcome {
+  color: #333;
+
+   font-weight: 700;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+}
+
+
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
   color: #e41f18 !important;
@@ -42,11 +52,33 @@
   white-space: nowrap;
 }
 
+/* Estilo para el botón de logout */
+.logout-button {
+  background: transparent;
+  border: none;
+  color: #e30613; /* Rojo para resaltar */
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.logout-button:hover {
+  color: #b30000; /* Rojo más oscuro al pasar el mouse */
+  text-decoration: underline;
+}
+
+.logout-button:focus {
+  outline: none;
+}
+
 .btn-join:hover {
   background-color: #c81912;
   border-color: #c81912;
   color: white;
 }
+
+
 
 @media (max-width: 991px) {
   .navbar-collapse {
@@ -62,5 +94,11 @@
   .btn-join {
     margin-top: 15px;
     width: 100%;
+  }
+
+    .user-welcome {
+    margin-right: auto;
+    margin-left: 10px;
+    font-size: 0.8rem;
   }
 }

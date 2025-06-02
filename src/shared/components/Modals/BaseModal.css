@@ -1,0 +1,35 @@
+/* Estilos para todos los modals de la aplicación */
+.app-modal .modal-header {
+  background-color: #f8f8f8;
+  border-bottom: 2px solid #eee;
+}
+
+.app-modal .modal-title {
+  font-weight: 600;
+  color: #333;
+}
+
+.app-modal .modal-footer {
+  border-top: 1px solid #eee;
+  padding: 1rem;
+}
+
+/* Estilo para botones en modal */
+.app-modal .btn-primary {
+  background-color: #e2211c;
+  border-color: #e2211c;
+}
+
+.app-modal .btn-primary:hover {
+  background-color: #c61c17;
+  border-color: #c61c17;
+}
+
+/* Animación para modal */
+.app-modal.fade .modal-dialog {
+  transition: transform 0.3s ease-out;
+}
+
+.app-modal.fade.show .modal-dialog {
+  transform: none;
+}

@@ -1,0 +1,374 @@
+.dashboard-container {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Estilos para filtros */
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  align-items: flex-end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filter-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+
+.filter-group select,
+.filter-group input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-width: 180px;
+}
+
+.filter-button {
+  background-color: #e2211c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.filter-button:hover {
+  background-color: #e74c3c;
+}
+
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Estilos para las cards */
+.notification-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
+}
+
+.notification-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.notification-card.success {
+  border-left: 4px solid #2ecc71;
+}
+
+.notification-card.warning {
+  border-left: 4px solid #f39c12;
+}
+
+.notification-card.error {
+  border-left: 4px solid #e74c3c;
+}
+
+
+/* Encabezado de la card */
+.card-headerr {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eee;
+}
+
+.notification-id {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notification-id h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.status-dot.success {
+  background-color: #2ecc71;
+}
+
+.status-dot.warning {
+  background-color: #3498db;
+}
+.status-dot.error {
+  background-color: #e74c3c;
+}
+
+.notification-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.date-label {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.date-value {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Contenido de la card */
+.card-content {
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notification-location {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.location-type, .location-detail {
+  font-size: 0.9rem;
+}
+
+.notification-description {
+  margin-top: 10px;
+  color: #555;
+}
+
+.notification-description p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.notification-status {
+  margin-top: auto;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-badge.cerrada {
+  background-color: #27ae60;
+  color: white;
+}
+
+.status-badge.terminada {
+  background-color: #3a539b;
+  color: white;
+}
+
+.status-badge.en-espera-de-aprobación {
+  background-color: #e74c3c;
+  color: white;
+}
+
+/* Botones de acción */
+.card-actions {
+  display: flex;
+  padding: 12px 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.action-button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.details-button {
+  background-color: #f2f2f2;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.details-button:hover {
+  background-color: #e6e6e6;
+}
+
+.accept-button {
+  background-color: #e2211c;
+  color: white;
+}
+
+.accept-button:hover {
+  background-color: #e2211c;
+}
+
+
+.status-dot.info {
+  background-color: #3498db;
+}
+/* Añade estos estilos al archivo CSS existente */
+
+/* Estilos para el contenedor de herramientas */
+.toolbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* Contenedor de filtros */
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  flex-grow: 1;
+}
+
+/* Estilos para el selector de vista */
+.view-toggle {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.view-button {
+  border: none;
+  background-color: transparent;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-button.active {
+  background-color: #e2211c; /* Color rojo JB */
+  color: white;
+}
+
+.view-button:hover:not(.active) {
+  background-color: #e0e0e0;
+}
+
+/* Estilos para la vista de tabla */
+.table-container {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.notificaciones-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.notificaciones-table th {
+  background-color: #f8f9fa;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.notificaciones-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: middle;
+}
+
+.notificaciones-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.notificaciones-table .folio-cell {
+  display: flex;
+  align-items: center;
+}
+
+.notificaciones-table .status-dot {
+  margin-right: 8px;
+}
+
+/* Estilos para badges en la tabla */
+.notificaciones-table .status-badge,
+.notificaciones-table .type-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  .toolbar-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .view-toggle {
+    align-self: flex-end;
+    margin-top: 10px;
+  }
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .filters-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-group, .filter-button {
+    width: 100%;
+  }
+}

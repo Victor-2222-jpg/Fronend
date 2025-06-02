@@ -1,18 +1,11 @@
-import { useEffect } from 'react'
-import Navbar from './shared/components/NavBar/NavBar'
-import './App.css'
-import LoginForm from './Views/pages/Login/LoginForm'
-import Welcome from './Views/pages/Guess/Welcome'
-import Dashboard from './Views/pages/admin/dashboard'
-import PlannerDashboard from './Views/pages/planner/dashboard'
-import GerenteDashboard from './Views/pages/gerencia mtto/dashboard'
-import ClienteDashboard from './Views/pages/cliente/dashboard'
-import Tecnico from './Views/pages/tecnico_encargado/dashboard'
-import Notificaciones from './Views/pages/cliente/Notificaciones/Notificaciones'
-import { ProtectedRoute } from './core/Guards/ProtectedRoute'
+import { useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import authService from './core/services/auth.service'
-import NotFoundHandler from './core/Guards/NotFoundHandler'
+import Navbar from './shared/components/NavBar/NavBar'
+import { ProtectedRoute } from './core/Guards/ProtectedRoute'
+import authService from './core/services/Auth/auth.service'
+import { routes } from './routes/routeConfig'
+import { usePrefetchRoutes } from './routes/AppRoutes'
+import './App.css'
 
 // Componente que renderiza la Navbar solo si no estamos en la ruta de login
 const NavbarWrapper = () => {
@@ -26,6 +19,7 @@ const NavbarWrapper = () => {
   return <Navbar />;
 };
 
+// Componente para la redirección en login
 const LoginRedirect = () => {
   // Verificar si el usuario ya está autenticado
   const isAuthenticated = authService.isAuthenticated();
@@ -36,12 +30,20 @@ const LoginRedirect = () => {
     return <Navigate to={redirectUrl} replace />;
   } else {
     // Si no está autenticado, mostrar el formulario de login
-    return <LoginForm />;
+    const LoginForm = lazy(() => import('./Views/pages/Login/LoginForm'));
+    return (
+      <Suspense fallback={<div>Cargando...</div>}>
+        <LoginForm />
+      </Suspense>
+    );
   }
 };
 
 function App() {
-
+  
+  usePrefetchRoutes();
+  
+  
   useEffect(() => {
     const checkTokenInterval = setInterval(() => {
       if (!authService.isAuthenticated()) {
@@ -53,61 +55,58 @@ function App() {
   }, []);
 
   return (
-   <BrowserRouter>
+    <BrowserRouter>
       <div className="App">
         {/* Navbar condicional */}
         <Routes>
           <Route path="*" element={<NavbarWrapper />} />
         </Routes>
         
-        <Routes>
-          {/* Ruta pública */}
-          <Route path="/login" element={<LoginRedirect />}/>
-          
-          {/* Ruta de redirección */}
-          
-          {/* Rutas protegidas para todos los usuarios autenticados */}
-          <Route element={<ProtectedRoute />}>
-            {/* Ruta de bienvenida general */}
-            <Route path="/" element={<Welcome/>} />
-            <Route path="/welcome" element={<Welcome/>} />
+        <Suspense fallback={<div>Cargando...</div>}>
+          <Routes>
+            {/* Ruta de login (especial) */}
+            <Route path="/login" element={<LoginRedirect />} />
             
-            {/* Rutas específicas para administradores */}
-            <Route element={<ProtectedRoute allowedRoles={['1']} />}>
-              <Route path="/admin" element={<Dashboard/>} />
-              <Route path="/admin/dashboard" element={<Dashboard/>} />
-            </Route>
-            
-            {/* Rutas específicas para gerentes */}
-            <Route element={<ProtectedRoute allowedRoles={['2']} />}>
-              <Route path="/gerente/dashboard" element={<GerenteDashboard/>} />
-            </Route>
-            
-            {/* Rutas específicas para planificadores */}
-            <Route element={<ProtectedRoute allowedRoles={['3']} />}>
-              <Route path="/planner/dashboard" element={<PlannerDashboard/>} />
-            </Route>
-            
-            {/* Rutas específicas para técnicos */}
-            <Route element={<ProtectedRoute allowedRoles={['4']} />}>
-              <Route path="/tecnico/dashboard" element={<Tecnico/>} />
-            </Route>
-            
-            {/* Rutas específicas para clientes */}
-            <Route element={<ProtectedRoute allowedRoles={['5']} />}>
-              <Route path="/cliente/dashboard" element={<ClienteDashboard/>} />
-              <Route path="/tickets" element={<Notificaciones/>} />
-            </Route>
-          </Route>
-          
-          {/* Ruta de fallback para manejar rutas no encontradas */}
-           <Route path="*" element={<NotFoundHandler />} />
-        </Routes>
+            {/* Mapeamos todas las demás rutas desde la configuración */}
+            {routes.map(route => {
+              // Saltamos la ruta de login porque ya la manejamos arriba
+              if (route.path === '/login') return null;
+              
+              // Para rutas protegidas
+              if (route.requiresAuth) {
+                return (
+                  <Route
+                    key={route.path}
+                    path={route.path}
+                    element={
+                      <ProtectedRoute allowedRoles={route.allowedRoles}>
+                        <Suspense>
+                          <route.component />
+                        </Suspense>
+                      </ProtectedRoute>
+                    }
+                  />
+                );
+              }
+              
+              // Para rutas públicas (no incluye login, que ya está manejado)
+              return (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={
+                    <Suspense fallback={<div>Cargando...</div>}>
+                      <route.component />
+                    </Suspense>
+                  }
+                />
+              );
+            })}
+          </Routes>
+        </Suspense>
       </div>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
-
-
+export default App;

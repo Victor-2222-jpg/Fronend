@@ -11,6 +11,13 @@
 .cursor-pointer {
   cursor: pointer;
 }
+.card-header{
+  background-color: #e2211c;
+}
+.btn-enviar{
+  background-color: #e2211c;
+  
+}
 
 /* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {

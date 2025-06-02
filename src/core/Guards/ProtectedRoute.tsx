@@ -1,16 +1,15 @@
-import { Navigate, useLocation, Outlet } from 'react-router-dom';
-import authService from '../services/auth.service';
+import { Navigate, useLocation } from 'react-router-dom';
+import authService from '../services/Auth/auth.service';
+import type { ProtectedRouteProps } from '../Models/Routes/ProtectedRoutes.interface';
 
-interface ProtectedRouteProps {
-  allowedRoles?: string[];
-}
 
-export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles }) => {
+
+export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children,allowedRoles }) => {
   const isAuthenticated = authService.isAuthenticated();
   const userRole = authService.getUserRole();
   const location = useLocation();
 
-  // Verificar autenticación
+  
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
@@ -21,11 +20,16 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles }) 
     
     // Manejo para cuando userRole es un array
     if (Array.isArray(userRole)) {
-      hasRequiredRole = userRole.some(role => allowedRoles.includes(role));
+      console.log('userRole es un array:', userRole);
+      console.log('allowedRoles:', allowedRoles);
+      hasRequiredRole = userRole.some(role => allowedRoles.includes(Number(role)));
+      console.log('hasRequiredRole bbbbb:', hasRequiredRole);
     } 
     // Manejo para cuando userRole es un string
     else if (userRole) {
-      hasRequiredRole = allowedRoles.includes(userRole);
+      
+      hasRequiredRole = allowedRoles.includes(Number(userRole));
+     
     }
 
     if (!hasRequiredRole) {
@@ -34,7 +38,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles }) 
     }
   }
 
-  return <Outlet />;
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;

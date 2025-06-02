@@ -1,50 +1,18 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import AuthService from '../../../core/services/auth.service';
+import React from 'react';
 import './LoginForm.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
-import logoJibe from '../../../assets/images/jibe.jpg'; // Importa el logo de JIBE
+import logoJibe from '../../../assets/images/Logo-grupo-Jibe-1.png';
+import { useLoginForm } from './useLoginForm';
 
-interface LoginData {
-  email: string;
-  password: string;
-}
-
-const LoginForm = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState<LoginData>({
-    email: '',
-    password: ''
-  });
-  const [error, setError] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError('');
-    
-    try {
-      await AuthService.login(formData.email, formData.password);
-      const redirectUrl = AuthService.getRedirectUrl();
-      console.log('Redirigiendo a:', redirectUrl);
-      navigate(redirectUrl);
-    } catch (err) {
-      console.error('Error en login:', err);
-      setError('Credenciales inválidas. Por favor, inténtelo de nuevo.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+const LoginForm: React.FC = () => {
+  const {
+    formData,
+    error,
+    isLoading,
+    handleChange,
+    handleSubmit
+  } = useLoginForm();
 
   return (
     <div className="login-background">

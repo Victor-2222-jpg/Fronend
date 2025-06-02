@@ -48,7 +48,7 @@ body, html {
 
 /* Panel izquierdo con logo */
 .left-panel {
-  background-color: #d6230c;
+  background-color: #ffffff;
   padding: 40px;
   width: 45%;
   display: flex;
@@ -70,8 +70,8 @@ body, html {
 
 /* Botón principal de acción */
 .btn-login {
-  background-color: #e41f18 !important;
-  border-color: #e41f18 !important;
+  background-color: #e2211c !important;
+  border-color: #e2211c !important;
   color: rgb(255, 243, 243) !important;
   padding: 0.5rem 1.5rem;
   border-radius: 0.25rem;
@@ -80,8 +80,8 @@ body, html {
 
 .btn-login:hover,
 .btn-login:focus {
-  background-color: #c82333 !important;
-  border-color: #bd2130 !important;
+  background-color: #e2211c !important;
+  border-color: #e2211c !important;
 }
 
 /* Ajustes responsivos */

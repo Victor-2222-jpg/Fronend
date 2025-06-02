@@ -1,0 +1,119 @@
+.notification-detail-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.notification-detail-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.status-indicator {
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.status-indicator.pendiente {
+  background-color: #3498db;
+  color: white;
+}
+
+.status-indicator.terminada {
+  background-color: #3a539b;
+  color: white;
+}
+
+.status-indicator.cerrada {
+  background-color: #27ae60;
+  color: white;
+}
+
+.notification-detail-section {
+  margin-bottom: 20px;
+}
+
+.notification-detail-section h5 {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.detail-row {
+  margin-bottom: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.notification-description {
+  background-color: #f8f9fa;
+  padding: 12px;
+  border-radius: 4px;
+  border-left: 3px solid #ddd;
+  line-height: 1.6;
+  white-space: pre-wrap;       /* Respeta espacios y saltos de línea */
+  word-wrap: break-word;       /* Rompe palabras largas */
+  max-height: 300px;           /* Altura máxima */
+  overflow-y: auto;            /* Scroll vertical si es necesario */
+  font-family: inherit;        /* Hereda la fuente del documento */
+}
+
+.status-indicator {
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Colores según estado */
+.status-indicator.warning {
+  background-color: #f39c12;
+  color: white;
+}
+
+.status-indicator.success {
+  background-color: #27ae60;
+  color: white;
+}
+
+.status-indicator.error {
+  background-color: #e74c3c;
+  color: white;
+}
+
+/* ... tus estilos existentes ... */
+
+.observaciones-tabla {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.observaciones-tabla table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.observaciones-tabla th {
+  background-color: #f8f9fa;
+  padding: 10px;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+}
+
+.observaciones-tabla td {
+  padding: 10px;
+  border-top: 1px solid #dee2e6;
+  vertical-align: top;
+}
+
+.observaciones-tabla tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.observaciones-tabla tr:hover {
+  background-color: #e9ecef;
+}

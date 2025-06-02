@@ -1,0 +1,66 @@
+.nueva-observacion-modal .modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nueva-observacion-modal .modal-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.nueva-observacion-modal .modal-body {
+  padding: 1.5rem;
+}
+
+.pregunta-observacion {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.incluir-observacion-check {
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.observacion-container {
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+.observacion-input {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.observacion-input:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Botones del footer */
+.nueva-observacion-modal .modal-footer {
+  border-top: 1px solid #dee2e6;
+  padding: 1rem;
+}
+
+.nueva-observacion-modal .btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  padding: 0.5rem 1rem;
+}
+
+.nueva-observacion-modal .btn-success:hover:not(:disabled) {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.nueva-observacion-modal .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.nueva-observacion-modal .btn-secondary:hover:not(:disabled) {
+  background-color: #5a6268;
+  border-color: #545b62;
+}

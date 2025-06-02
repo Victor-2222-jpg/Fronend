@@ -1,0 +1,85 @@
+.orden-detail-container {
+  padding: 15px;
+}
+
+.orden-detail-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.status-indicator {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.status-indicator.warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-indicator.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-indicator.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status-indicator.info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.orden-detail-section {
+  margin-bottom: 20px;
+}
+
+.orden-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.orden-description {
+  white-space: pre-line;
+}
+
+.detail-row {
+  margin-bottom: 8px;
+}
+
+.prioridad-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.prioridad-badge.alta {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.prioridad-badge.media {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.prioridad-badge.baja {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.sin-comentarios {
+  font-style: italic;
+  color: #6c757d;
+}
+
+.observaciones-tabla {
+  max-height: 200px;
+  overflow-y: auto;
+}

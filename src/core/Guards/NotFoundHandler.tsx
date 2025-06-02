@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import authService from "../services/auth.service";
+import authService from "../services/Auth/auth.service";
 
  export const NotFoundHandler = () => {
   // Verificar si el usuario está autenticado

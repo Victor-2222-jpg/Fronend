@@ -1,0 +1,244 @@
+/* Estilos para la tabla de órdenes */
+.ordenes-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ordenes-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.ordenes-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #dee2e6;
+  vertical-align: middle;
+}
+
+.ordenes-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ordenes-table tr.success {
+  background-color: rgba(40, 167, 69, 0.05);
+}
+
+.ordenes-table tr.warning {
+  background-color: rgba(255, 193, 7, 0.05);
+}
+
+.ordenes-table tr.error {
+  background-color: rgba(220, 53, 69, 0.05);
+}
+
+.ordenes-table tr.info {
+  background-color: rgba(23, 162, 184, 0.05);
+}
+
+.folio-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-dot.success {
+  background-color: #28a745;
+}
+
+.status-dot.warning {
+  background-color: #ffc107;
+}
+
+.status-dot.error {
+  background-color: #dc3545;
+}
+
+.status-dot.info {
+  background-color: #17a2b8;
+}
+
+.status-dot.default {
+  background-color: #6c757d;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.completada {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-badge.en-proceso {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.cancelada {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status-badge.pendiente {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.action-button {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.details-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.details-button:hover {
+  background-color: #0069d9;
+}
+
+/* Estilos para las tarjetas de órdenes */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.orden-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.orden-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.orden-card.success {
+  border-top: 4px solid #28a745;
+}
+
+.orden-card.warning {
+  border-top: 4px solid #ffc107;
+}
+
+.orden-card.error {
+  border-top: 4px solid #dc3545;
+}
+
+.orden-card.info {
+  border-top: 4px solid #17a2b8;
+}
+
+.orden-card.default {
+  border-top: 4px solid #6c757d;
+}
+
+.card-header {
+  padding: 15px;
+  border-bottom: 1px solid #e9ecef;
+  background-color: #f8f9fa;
+}
+
+.orden-id {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.orden-id h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.orden-notificacion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.orden-fechas {
+  margin-bottom: 15px;
+}
+
+.fecha-item {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.orden-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.orden-descripcion {
+  margin-top: 15px;
+}
+
+.orden-descripcion strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.orden-descripcion p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.card-actions {
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #e9ecef;
+}
+
+.empty-message {
+  grid-column: 1 / -1;
+  padding: 20px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  color: #6c757d;
+}

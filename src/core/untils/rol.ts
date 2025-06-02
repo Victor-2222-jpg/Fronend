@@ -1,14 +1,14 @@
-export const getDashboardByRole = (role: string): string => {
+export const getDashboardByRole = (role: number): string => {
   switch (role) {
-    case '1':
+    case 1:
       return '/admin/dashboard';
-    case '2':
-      return '/gerente/dashboard';
-    case '3':
+    case 2:
+      return '/notificaciones';
+    case 3:
       return '/planner/dashboard';
-    case '4':
+    case 4:
       return '/tecnico/dashboard';
-    case '5':
+    case 5:
       return '/cliente/dashboard';
     default:
       return '/welcome'; 

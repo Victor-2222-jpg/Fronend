@@ -1,9 +1,9 @@
 import axios from 'axios';
-import config from '../../config/config';
-import tokenService from './token/token.service';
-import { getDashboardByRole } from '../untils/rol';
+import config from '../../../config/config';
+import tokenService from '../token/token.service';
+import { getDashboardByRole } from '../../untils/rol';
 
-const API_URL = config.API_URL + '/account/login';
+const API_URL = config.API_URL + '/users/login';
 
 class AuthService {
   async login(email: string, password: string) {
@@ -36,7 +36,7 @@ class AuthService {
   logout() {
     localStorage.removeItem('token');
   }
-  getUserRole(): string | string[] | null {
+  getUserRole(): number | string[] | null {
     return tokenService.getUserRole();
   }
 
@@ -48,7 +48,7 @@ class AuthService {
     
     if (Array.isArray(role)) {
 
-      return getDashboardByRole(role[0]);
+      return getDashboardByRole(parseInt(role[0], 10));
     }
     
     // Si es un string, lo usamos directamente

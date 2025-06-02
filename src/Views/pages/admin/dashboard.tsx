@@ -12,6 +12,7 @@ const Dashboard: React.FC = () => {
 
 
 
+
       <p>Bienvenido al panel de administración.</p>
       <p>Aquí puedes gestionar usuarios, roles y permisos.</p>
       <p>Utiliza el menú lateral para navegar por las diferentes secciones.</p>
