@@ -1,4 +1,4 @@
-import type { Tecnico } from "./Tecnico.interface";
+
 
 export interface OrdenEnvio {
     fecha_inicio: string; // Fecha de envío de la orden

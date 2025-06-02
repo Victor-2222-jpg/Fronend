@@ -1,4 +1,3 @@
-import type { NotificacionCompleta } from '../Notificaciones/notinueva.interface';
 
 export interface OrdenTrabajo {
   id: number;
