@@ -35,7 +35,7 @@ const DashboardOrden: React.FC = () => {
     handleConfirmAsignacion,
     handleCloseModal,
     handleOpenAprobarModal,
-    handleOpenRechazarModal,
+
     handleCloseEstadoModal,
     handleConfirmEstado,
     getTipoCard,
@@ -69,9 +69,9 @@ const DashboardOrden: React.FC = () => {
           viewMode={viewMode as 'cards' | 'table'}
           onViewModeChange={toggleViewMode} stateFilterValue={''} onStateFilterChange={function (value: string): void {
             throw new Error('Function not implemented.');
-          } } dateFromValue={''} onDateFromChange={function (value: string): void {
+          } } dateFromValue={''} onDateFromChange={function (): void {
             throw new Error('Function not implemented.');
-          } } dateToValue={''} onDateToChange={function (value: string): void {
+          } } dateToValue={''} onDateToChange={function (): void {
             throw new Error('Function not implemented.');
           } } onApplyFilters={function (): void {
             throw new Error('Function not implemented.');
@@ -133,13 +133,11 @@ const DashboardOrden: React.FC = () => {
         orden={selectedOrden}
       />
       
-      <EstadoNotificacionModal
+         <EstadoNotificacionModal
         show={showEstadoModal}
         onHide={handleCloseEstadoModal}
         onConfirm={handleConfirmEstado}
-        accion={accionActual}
-        id={selectedOrdenAccion?.id}
-      />
+        accion={accionActual === "aprobar" ? "aceptar" : "cancelar"} notificacion={null}      />
 
       <OrdenAsignacionModal
         show={showAsignacionModal}

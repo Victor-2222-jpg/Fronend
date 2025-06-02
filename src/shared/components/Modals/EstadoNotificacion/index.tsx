@@ -115,6 +115,7 @@ const EstadoNotificacionModal: React.FC<EstadoNotificacionModalProps> = ({
             
             <Button variant={buttonVariant} type="submit">
               {accion === 'aceptar' ? 'Aceptar' : 'Cancelar'}
+              disabled={false}
             </Button>
           </div>
         </div>
