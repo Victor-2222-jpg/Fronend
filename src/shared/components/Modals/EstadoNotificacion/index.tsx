@@ -20,7 +20,6 @@ const EstadoNotificacionModal: React.FC<EstadoNotificacionModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const form = e.currentTarget as HTMLFormElement;
     
     // Validación: si se marca incluir observaciones, éstas no pueden estar vacías
     if (incluirObservaciones && observaciones.trim() === '') {

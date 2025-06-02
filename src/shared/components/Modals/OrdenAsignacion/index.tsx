@@ -88,11 +88,11 @@ const OrdenAsignacionModal: React.FC<OrdenAsignacionModalProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+   const [ setIsSubmitting] = useState<boolean>(false);
   
   const handleSubmit = async () => {
     if (validateForm() && orden) {
-      setIsSubmitting(true);
+      
       try {
         // Preparar datos para enviar al API
         const ordenData: OrdenEnvio = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import type { OrdenTrabajo } from '../../../../core/Models/Ordenes/Orden.interface';
+
 import type { OrdenTrabajoSimplificada } from '../../../../core/Models/Ordenes/ordenobtener.interface';
 
 interface OrdenesTableProps {

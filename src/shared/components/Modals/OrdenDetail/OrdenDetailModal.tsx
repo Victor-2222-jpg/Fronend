@@ -1,6 +1,6 @@
 import React from 'react';
 import BaseModal from '../BaseModal';
-import { Button, Table } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import './OrdenDetailModal.css';
 import type { OrdenTrabajoSimplificada } from '../../../../core/Models/Ordenes/ordenobtener.interface';
 

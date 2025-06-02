@@ -7,7 +7,6 @@ import { useDashboard } from './useDashboard';
 import NotificacionesTable from './components/NotificacionesTable';
 import NotificacionesCards from './components/NotificacionesCards';
 // Importar íconos (puedes usar react-icons o bootstrap-icons)
-import { BsTable, BsGrid } from 'react-icons/bs';
 import NuevaObservacionModal from '../../../../shared/components/Modals/EditarModal';
 import FiltersToolbar from '../../../../shared/components/Filtro/FiltersToolbar';
 
@@ -30,7 +29,6 @@ const GerenteDashboard: React.FC = () => {
     handleCloseEstadoModal,
     handleOpenEditarModal,      // Nueva función
     handleCloseEditarModal,     // Nueva función
-    handleGuardarObservacion,
     handleConfirmEstado,
     handleAddComment,
     getTipoCard,
@@ -39,14 +37,11 @@ const GerenteDashboard: React.FC = () => {
     totalPages,
     handlePageChange,
     viewMode,       // Nuevo estado
-    toggleViewMode,
-    tecnicos,
-    stateOptions,  // Opciones de estado
+    tecnicos,  // Opciones de estado
     userOptions,   // Opciones de usuario
     usuarioActual,
     userFilterValue,
-    handleUserFilterChange,
-    handleViewModeChange, // Nueva función
+    handleUserFilterChange, // Nueva función
     loadingTecnicos  // Nueva función
   } = useDashboard();
 
@@ -61,9 +56,9 @@ const GerenteDashboard: React.FC = () => {
           
           onUserFilterChange={handleUserFilterChange} stateOptions={[]} stateFilterValue={''} onStateFilterChange={function (value: string): void {
             throw new Error('Function not implemented.');
-          } } dateFromValue={''} onDateFromChange={function (value: string): void {
+          } } dateFromValue={''} onDateFromChange={function (): void {
             throw new Error('Function not implemented.');
-          } } dateToValue={''} onDateToChange={function (value: string): void {
+          } } dateToValue={''} onDateToChange={function (): void {
             throw new Error('Function not implemented.');
           } } onApplyFilters={function (): void {
             throw new Error('Function not implemented.');
@@ -121,34 +116,35 @@ const GerenteDashboard: React.FC = () => {
         onHide={handleCloseModal}
        notificacion={
           selectedNotificacion
-            ? { 
-                ...selectedNotificacion, 
-                usuarioCreador: {
-                  id: selectedNotificacion.usuarioCreador?.id || 0,
-                  Nombre: selectedNotificacion.usuarioCreador?.Nombre || '',
-                  Apellido_Paterno: selectedNotificacion.usuarioCreador?.Apellido_Paterno || '',
-                  Apellido_Materno: selectedNotificacion.usuarioCreador?.Apellido_Materno || '',
-                  email: selectedNotificacion.usuarioCreador?.email || ''
-                },
-                // Usar la nueva estructura ClaseDepartamentoSubsidiaria
-                ClaseDepartamentoSubsidiaria: {
-                  id: selectedNotificacion.ClaseDepartamentoSubsidiaria?.id || 0,
-                  subsidiaria: {
-                    id: selectedNotificacion.ClaseDepartamentoSubsidiaria?.subsidiaria?.id || 0,
-                    nombre: selectedNotificacion.ClaseDepartamentoSubsidiaria?.subsidiaria?.nombre || 'Sin subsidiaria'
-                  },
-                  departamento: {
-                    id: selectedNotificacion.ClaseDepartamentoSubsidiaria?.departamento?.id || 0,
-                    nombre: selectedNotificacion.ClaseDepartamentoSubsidiaria?.departamento?.nombre || 'Sin departamento'
-                  },
-                  clase: {
-                    id: selectedNotificacion.ClaseDepartamentoSubsidiaria?.clase?.id || 0,
-                    nombre: selectedNotificacion.ClaseDepartamentoSubsidiaria?.clase?.nombre || 'Sin clase'
-                  }
-                },
-                descripcion: selectedNotificacion.descripcion || ''
-              }
-            : null
+      ? { 
+          ...selectedNotificacion, 
+          usuarioCreador: {
+            id: selectedNotificacion.usuarioCreador?.id || 0,
+            Nombre: selectedNotificacion.usuarioCreador?.Nombre || '',
+            Apellido_Paterno: selectedNotificacion.usuarioCreador?.Apellido_Paterno || '',
+            Apellido_Materno: selectedNotificacion.usuarioCreador?.Apellido_Materno || '',
+            email: selectedNotificacion.usuarioCreador?.email || ''
+          },
+          ClaseDepartamentoSubsidiaria: {
+            id: selectedNotificacion.ClaseDepartamentoSubsidiaria?.id || 0,
+            subsidiaria: {
+              id: selectedNotificacion.ClaseDepartamentoSubsidiaria?.subsidiaria?.id || 0,
+              nombre: selectedNotificacion.ClaseDepartamentoSubsidiaria?.subsidiaria?.nombre || 'Sin subsidiaria'
+            },
+            departamento: {
+              id: selectedNotificacion.ClaseDepartamentoSubsidiaria?.departamento?.id || 0,
+              nombre: selectedNotificacion.ClaseDepartamentoSubsidiaria?.departamento?.nombre || 'Sin departamento'
+            },
+            clase: {
+              id: selectedNotificacion.ClaseDepartamentoSubsidiaria?.clase?.id || 0,
+              nombre: selectedNotificacion.ClaseDepartamentoSubsidiaria?.clase?.nombre || 'Sin clase',
+              descripcion: selectedNotificacion.ClaseDepartamentoSubsidiaria?.clase?.descripcion || 'Sin descripción',
+              ubicacion: selectedNotificacion.ClaseDepartamentoSubsidiaria?.clase?.ubicacion || 'Sin ubicación'
+            }
+          },
+          // Otras propiedades...
+        }
+      : null
         }
       />
 

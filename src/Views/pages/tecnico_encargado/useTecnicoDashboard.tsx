@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, use } from 'react';
 import { OrdenService } from '../../../core/services/Orden/OrdenService.service';
-import type { OrdenTrabajo } from '../../../core/Models/Ordenes/orden.interface';
 import type { OrdenTrabajoSimplificada } from '../../../core/Models/Ordenes/ordenobtener.interface';
 
 export const useTecnico = () => {

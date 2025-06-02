@@ -4,6 +4,7 @@ import type { NotificacionCompleta } from '../../../../core/Models/Notificacione
 import OrdenAsignacionModal from '../OrdenAsignacion';
 import './EditarModal.css';
 import type { Tecnico } from '../../../../core/Models/Ordenes/Tecnico.interface';
+import type { OrdenTrabajo } from '../../../../core/Models/Ordenes/orden.interface';
 
 interface NuevaObservacionModalProps {
   show: boolean;
@@ -150,21 +151,22 @@ const NuevaObservacionModal: React.FC<NuevaObservacionModalProps> = ({
       </Modal>
 
       {/* Modal de asignación de orden */}
-      <OrdenAsignacionModal
-        show={showOrdenModal}
-        onHide={handleOrdenModalClose}
-        orden={notificacion ? {
-          id: notificacion.id,
-          estado: notificacion.estado_notificacion,
-          fecha_creacion: new Date().toISOString(),
-          notificacion: notificacion,
-          tecnico_id: 0,
-          tecnico: null
-        } : null}
-        tecnicos={tecnicos} 
-        isLoading={loadingTecnicos} 
-        usuarioCreador={usuarioLogueado}
-      />
+            <OrdenAsignacionModal
+              show={showOrdenModal}
+              onHide={handleOrdenModalClose}
+              orden={notificacion ? {
+                id: notificacion.id,
+                estado: notificacion.estado_notificacion,
+                fecha_creacion: new Date().toISOString(),
+                fecha_inicio: '',
+                fecha_fin: '',
+                notificacion: notificacion,
+                tecnico: null
+              } as unknown as OrdenTrabajo : null}
+              tecnicos={tecnicos} 
+              isLoading={loadingTecnicos} 
+              usuarioCreador={usuarioLogueado}
+            />
     </>
   );
 };

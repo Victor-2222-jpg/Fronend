@@ -43,7 +43,6 @@ const FiltersToolbar: React.FC<FiltersToolbarProps> = ({
   // Usuario
   showUserFilter = false,
   userOptions = [],
-  userFilterValue = '',
   onUserFilterChange = () => {},
   
   // Estado
@@ -70,7 +69,7 @@ const FiltersToolbar: React.FC<FiltersToolbarProps> = ({
   // Estado para el buscador de usuarios
   const [userSearchTerm, setUserSearchTerm] = useState("");
   const [showUserResults, setShowUserResults] = useState(false);
-  const [selectedUserLabel, setSelectedUserLabel] = useState("");
+  const [setSelectedUserLabel] = useState("");
   
   // Filtrar usuarios basados en el término de búsqueda
   const filteredUsers = userSearchTerm
@@ -90,7 +89,7 @@ const FiltersToolbar: React.FC<FiltersToolbarProps> = ({
   };
   
   const handleUserSelect = (user: SelectOption) => {
-    setSelectedUserLabel(user.label);
+   
     setUserSearchTerm(user.label);
     onUserFilterChange(user.value);
     setShowUserResults(false);
@@ -107,7 +106,6 @@ const FiltersToolbar: React.FC<FiltersToolbarProps> = ({
   };
   
   const clearUserFilter = () => {
-    setSelectedUserLabel("");
     setUserSearchTerm("");
     onUserFilterChange("");
   };

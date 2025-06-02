@@ -4,8 +4,7 @@ import { NotificationDetailModal } from '../../../shared/components/Modals';
 import Pagination from '../../../shared/components/Pagination';
 import { useNotificacionDashboard } from './useNotificacionDashboard';
 import NotificacionesTable from './components/NotificacionesTable';
-import NotificacionesCards from './components/NotificacionesCards';
-import { BsTable, BsGrid } from 'react-icons/bs'; // Puedes instalar react-icons si no está ya
+import NotificacionesCards from './components/NotificacionesCards'; // Puedes instalar react-icons si no está ya
 import FiltersToolbar from '../../../shared/components/Filtro/FiltersToolbar';
 
 const ClienteDashboard: React.FC = () => {
@@ -20,23 +19,13 @@ const ClienteDashboard: React.FC = () => {
     handlePageChange,
     handleShowDetails,
     handleCloseModal,
-    handleEstadoChange,
-    handleFechaDesdeChange,
-    handleFechaHastaChange,
-    handleApplyFilters,
-    handleResetFilters,
     getTipoCard,
-    formatearFecha,
-    estadoFiltro, 
-    fechaDesde,  
-    fechaHasta,   
-    filtrosAplicados,
-    stateOptions,     // Opciones de estado
+    formatearFecha,    // Opciones de estado
     userOptions,      // Opciones de usuario
     viewMode,        // Nuevo estado
     userFilterValue, // Valor del filtro de usuario
     handleUserFilterChange, // Nueva función
-    toggleViewMode   // Nueva función
+      // Nueva función
   } = useNotificacionDashboard();
 
   return (
@@ -49,9 +38,9 @@ const ClienteDashboard: React.FC = () => {
           userFilterValue={userFilterValue}
           onUserFilterChange={handleUserFilterChange} stateOptions={[]} stateFilterValue={''} onStateFilterChange={function (value: string): void {
             throw new Error('Function not implemented.');
-          } } dateFromValue={''} onDateFromChange={function (value: string): void {
+          } } dateFromValue={''} onDateFromChange={function (): void {
             throw new Error('Function not implemented.');
-          } } dateToValue={''} onDateToChange={function (value: string): void {
+          } } dateToValue={''} onDateToChange={function (): void {
             throw new Error('Function not implemented.');
           } } onApplyFilters={function (): void {
             throw new Error('Function not implemented.');
@@ -98,10 +87,41 @@ const ClienteDashboard: React.FC = () => {
           />
         )}
         
-        <NotificationDetailModal 
+     <NotificationDetailModal 
           show={showDetailModal}
           onHide={handleCloseModal}
-          notificacion={selectedNotificacion}
+          notificacion={
+            selectedNotificacion
+              ? { 
+                  ...selectedNotificacion, 
+                  usuarioCreador: {
+                    id: selectedNotificacion.usuarioCreador?.id || 0,
+                    Nombre: selectedNotificacion.usuarioCreador?.Nombre || '',
+                    Apellido_Paterno: selectedNotificacion.usuarioCreador?.Apellido_Paterno || '',
+                    Apellido_Materno: selectedNotificacion.usuarioCreador?.Apellido_Materno || '',
+                    email: selectedNotificacion.usuarioCreador?.email || ''
+                  },
+                  ClaseDepartamentoSubsidiaria: {
+                    id: selectedNotificacion.ClaseDepartamentoSubsidiaria?.id || 0,
+                    subsidiaria: {
+                      id: selectedNotificacion.ClaseDepartamentoSubsidiaria?.subsidiaria?.id || 0,
+                      nombre: selectedNotificacion.ClaseDepartamentoSubsidiaria?.subsidiaria?.nombre || 'Sin subsidiaria'
+                    },
+                    departamento: {
+                      id: selectedNotificacion.ClaseDepartamentoSubsidiaria?.departamento?.id || 0,
+                      nombre: selectedNotificacion.ClaseDepartamentoSubsidiaria?.departamento?.nombre || 'Sin departamento'
+                    },
+                    clase: {
+                      id: selectedNotificacion.ClaseDepartamentoSubsidiaria?.clase?.id || 0,
+                      nombre: selectedNotificacion.ClaseDepartamentoSubsidiaria?.clase?.nombre || 'Sin clase',
+                      descripcion: selectedNotificacion.ClaseDepartamentoSubsidiaria?.clase?.descripcion || 'Sin descripción',
+                      ubicacion: selectedNotificacion.ClaseDepartamentoSubsidiaria?.clase?.ubicacion || 'Sin ubicación'
+                    }
+                  },
+                  // Otras propiedades...
+                }
+              : null
+          }
         />
       </div>
     </>

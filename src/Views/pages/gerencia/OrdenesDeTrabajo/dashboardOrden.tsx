@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NotificationDetailModal } from '../../../../shared/components/Modals';
 import EstadoNotificacionModal from '../../../../shared/components/Modals/EstadoNotificacion';
 import '../dashboard/dashboard.css';
 import './dashboardOrden.css';
@@ -10,7 +9,6 @@ import { OrdenGerenciaModal } from '../../../../shared/components/Modals/OrdenGe
 import OrdenCard from './components/OrdenCard';
 import OrdenTable from './components/OrdenTable';
 // Importar íconos
-import { BsTable, BsGrid } from 'react-icons/bs';
 import FiltersToolbar from '../../../../shared/components/Filtro/FiltersToolbar';
 
 const DashboardOrden: React.FC = () => {

@@ -4,7 +4,7 @@ import { useTecnico } from './useTecnicoDashboard';
 import OrdenesTable from './components/OrdenesTable';
 import OrdenesCards from './components/OrdenesCards';
 import Pagination from '../../../shared/components/Pagination';
-import { BsTable, BsGrid } from 'react-icons/bs';
+
 import '../notificacion/dashboard.css'; // Asegúrate de que este archivo CSS esté en la ruta correcta
 import OrdenDetailModal from '../../../shared/components/Modals/OrdenDetail/OrdenDetailModal';
 import FiltersToolbar from '../../../shared/components/Filtro/FiltersToolbar';
@@ -21,9 +21,7 @@ const Tecnico: React.FC = () => {
     handlePageChange,
     handleShowDetails,
     handleCloseModal,
-    handleEstadoChange,
-    handleFechaDesdeChange,
-    handleFechaHastaChange,
+    
     handleApplyFilters,
     handleResetFilters,
     getTipoCard,
@@ -31,8 +29,6 @@ const Tecnico: React.FC = () => {
     stateOptions,
     formatearFecha,
     estadoFiltro,
-    fechaDesde,
-    fechaHasta,
     filtrosAplicados,
     viewMode,
     toggleViewMode
@@ -62,11 +58,11 @@ const Tecnico: React.FC = () => {
           // Vista
           showViewToggle={true}
           viewMode={viewMode as 'cards' | 'table'}
-          onViewModeChange={toggleViewMode} onStateFilterChange={function (value: string): void {
+          onViewModeChange={toggleViewMode} onStateFilterChange={function (): void {
             throw new Error('Function not implemented.');
-          } } dateFromValue={''} onDateFromChange={function (value: string): void {
+          } } dateFromValue={''} onDateFromChange={function (): void {
             throw new Error('Function not implemented.');
-          } } dateToValue={''} onDateToChange={function (value: string): void {
+          } } dateToValue={''} onDateToChange={function (): void {
             throw new Error('Function not implemented.');
           } }        />
 

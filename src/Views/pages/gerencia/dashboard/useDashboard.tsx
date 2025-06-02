@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo, useRef, type SetStateAction } from 'react';
+import { useState, useEffect, useCallback, useRef, type SetStateAction } from 'react';
 import NotificacionesService from '../../../../core/services/Notificaciones/Notificaciones.service';
 import type { NotificacionCompleta } from '../../../../core/Models/Notificaciones/notinueva.interface';
 import type { Tecnico } from '../../../../core/Models/Ordenes/Tecnico.interface';
@@ -21,10 +21,7 @@ const [usuarioActual, setUsuarioActual] = useState<{ id: number }>({ id: 1 });
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage] = useState(15);
 
-  const [fechaDesde, setFechaDesde] = useState<string>('');
-  const [fechaHasta, setFechaHasta] = useState<string>('');
-   const [estadoFiltro, setEstadoFiltro] = useState<string>('');
-
+ 
    const [userOptions, setUserOptions] = useState<{ value: string; label: string }[]>([]);
   const [userFilterValue, setUserFilterValue] = useState('');
 
@@ -317,24 +314,11 @@ const toggleViewMode = useCallback(() => {
     }
   }, [fetchNotificaciones]);
 
-   const handleFechaDesdeChange = (fecha: string) => {
-    setFechaDesde(fecha);
-  };
   
-  const handleFechaHastaChange = (fecha: string) => {
-    setFechaHasta(fecha);
-  };
-  
-  const handleEstadoChange = (estado: string) => {
-    setEstadoFiltro(estado);
-  };
   
   // (Eliminado: declaración duplicada de toggleViewMode)
   
-  const handleApplyFilters = () => {
-    setFiltrosAplicados(true);
-    // Aquí puedes agregar lógica para aplicar los filtros a tus datos
-  };
+  
   const handleUserFilterChange = (value: SetStateAction<string>) => {
     setUserFilterValue(value);
     // Aquí puedes hacer lo que necesites con el valor seleccionado
