@@ -45,29 +45,31 @@ export const useDashboardOrden = () => {
   const ordenService = new OrdenService();
 
   // Cargar órdenes
-       const fetchOrdenes = useCallback(async () => {
-      try {
-        setLoading(true);
-        const response = await ordenService.obtenerOrdenes();
-        
-        // Extraer directamente ordenesTrabajo del objeto response
-        // Si response es un array de objetos con 'ordenesTrabajo', aplanar todos
-        const ordenesArray = Array.isArray(response)
-          ? response.flatMap((item: any) => item.ordenesTrabajo || [])
-          : [];
-        
-        console.log('Órdenes recibidas:', ordenesArray);
-        
-        // Asegúrate de que ordenes siempre sea un array
-        setOrdenes(Array.isArray(ordenesArray) ? ordenesArray : []);
-        setTotalPages(Math.ceil(ordenesArray.length / itemsPerPage));
-        setLoading(false);
-      } catch (err) {
-        setError('Error al cargar las órdenes de trabajo. Por favor, intente más tarde.');
-        setLoading(false);
-        console.error('Error fetching ordenes:', err);
-      }
-    }, [itemsPerPage]);
+            const fetchOrdenes = useCallback(async () => {
+        try {
+          setLoading(true);
+          const response = await ordenService.obtenerOrdenes();
+          
+          console.log('Response completa:', response);
+          
+          // Si response es un array, tomar el primer elemento
+          const apiResponse = Array.isArray(response) ? response[0] : response;
+          // Extraer el array de órdenes de la propiedad 'ordenesTrabajo'
+          const ordenesArray = apiResponse?.ordenesTrabajo || [];
+          
+          console.log('Órdenes extraídas:', ordenesArray);
+          console.log('Cantidad de órdenes:', ordenesArray.length);
+          
+          // Asegurar que sea un array válido
+          setOrdenes(Array.isArray(ordenesArray) ? ordenesArray : []);
+          setTotalPages(Math.ceil(ordenesArray.length / itemsPerPage));
+          setLoading(false);
+        } catch (err) {
+          setError('Error al cargar las órdenes de trabajo. Por favor, intente más tarde.');
+          setLoading(false);
+          console.error('Error fetching ordenes:', err);
+        }
+      }, [itemsPerPage]);
 
   const fetchTecnicos = useCallback(async () => {
     try {
