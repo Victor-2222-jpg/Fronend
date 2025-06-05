@@ -93,7 +93,7 @@ export const routes: RouteConfig[] = [
     
   },
   {
-    path: '/tickets',
+    path: '/notificacion',
     component: Notificaciones,
     requiresAuth: false
     
