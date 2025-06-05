@@ -41,6 +41,7 @@ const GerenteDashboard: React.FC = () => {
     userOptions,   // Opciones de usuario
     usuarioActual,
     userFilterValue,
+    toggleViewMode, // Nueva función
     handleUserFilterChange, // Nueva función
     loadingTecnicos  // Nueva función
   } = useDashboard();
@@ -64,7 +65,11 @@ const GerenteDashboard: React.FC = () => {
             throw new Error('Function not implemented.');
           } } onResetFilters={function (): void {
             throw new Error('Function not implemented.');
-          } } filtersApplied={false}        
+          } } filtersApplied={false}  
+          
+          showViewToggle={true}
+          viewMode={viewMode}
+          onViewModeChange={toggleViewMode}
         // ... otras props
       />
 

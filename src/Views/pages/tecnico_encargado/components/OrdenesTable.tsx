@@ -1,20 +1,26 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 
 import type { OrdenTrabajoSimplificada } from '../../../../core/Models/Ordenes/ordenobtener.interface';
+import { FaHistory, FaTasks } from 'react-icons/fa';
 
 interface OrdenesTableProps {
   ordenes: OrdenTrabajoSimplificada[];
   getTipoCard: (estado: string) => string;
   formatearFecha: (fecha: string) => string;
   handleShowDetails: (orden: OrdenTrabajoSimplificada) => void;
+   handleShowSeguimiento: (orden: OrdenTrabajoSimplificada) => void;
+   handleShowHistorial: (orden: OrdenTrabajoSimplificada) => void; // NUEVA PROP
+
 }
 
 const OrdenesTable: React.FC<OrdenesTableProps> = ({
   ordenes,
   getTipoCard,
   formatearFecha,
-  handleShowDetails
+  handleShowDetails,
+  handleShowSeguimiento,
+  handleShowHistorial
 }) => {
   return (
     <Table responsive striped hover className="ordenes-table">
@@ -53,6 +59,26 @@ const OrdenesTable: React.FC<OrdenesTableProps> = ({
                 >
                   Detalles
                 </button>
+
+                <Button
+                    variant="outline-success"
+                    size="sm"
+                    onClick={() => handleShowSeguimiento(orden)}
+                    title="Seguimiento de orden"
+                  >
+                    <FaTasks className="me-1" />
+                    Seguimiento
+                  </Button>
+
+                  <Button
+                    variant="outline-info"
+                    size="sm"
+                    onClick={() => handleShowHistorial(orden)}
+                    title="Ver historial"
+                  >
+                    <FaHistory className="me-1" />
+                    Historial
+                  </Button>
               </td>
             </tr>
           );

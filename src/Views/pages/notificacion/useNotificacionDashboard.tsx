@@ -220,6 +220,7 @@ export const useNotificacionDashboard = () => {
     fechaHasta,
     filtrosAplicados,
     
+    
     // Manejadores
     handlePageChange,
     handleShowDetails,

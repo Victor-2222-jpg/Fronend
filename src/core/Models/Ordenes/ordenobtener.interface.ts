@@ -1,3 +1,5 @@
+import type { Tecnico } from "./Tecnico.interface";
+
 export interface NotificacionSimplificada {
   id: number;
   descripcion: string;
@@ -14,7 +16,10 @@ export interface OrdenTrabajoSimplificada {
   fecha_fin: string;
   fecha_creacion: Date | null;
   estado: string;
+  
+  tecnico_responsable?: Tecnico | null;
   notificacion: NotificacionSimplificada;
+  
 }
 
 export interface OrdenesTrabajoRespuesta {

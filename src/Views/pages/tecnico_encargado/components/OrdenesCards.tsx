@@ -1,5 +1,7 @@
 import React from 'react';
 import type { OrdenTrabajoSimplificada } from '../../../../core/Models/Ordenes/ordenobtener.interface';
+import { Button } from 'react-bootstrap';
+import { FaHistory, FaTasks } from 'react-icons/fa';
 
 
 
@@ -8,13 +10,17 @@ interface OrdenesCardsProps {
   getTipoCard: (estado: string) => string;
   formatearFecha: (fecha: string) => string;
   handleShowDetails: (orden: OrdenTrabajoSimplificada) => void;
+  handleShowSeguimiento: (orden: OrdenTrabajoSimplificada) => void;
+  handleShowHistorial: (orden: OrdenTrabajoSimplificada) => void;
 }
 
 const OrdenesCards: React.FC<OrdenesCardsProps> = ({
   ordenes,
   getTipoCard,
   formatearFecha,
-  handleShowDetails
+  handleShowDetails,
+  handleShowSeguimiento,
+  handleShowHistorial
 }) => {
   return (
     <div className="cards-container">
@@ -59,6 +65,23 @@ const OrdenesCards: React.FC<OrdenesCardsProps> = ({
                 >
                   Ver detalles
                 </button>
+                <Button 
+                    variant="outline-success"
+                    className="flex-fill"
+                    onClick={() => handleShowSeguimiento(orden)}
+                  >
+                    <FaTasks className="me-1" />
+                    Seguimiento
+                  </Button>
+
+                  <Button 
+                  variant="outline-info"
+                  className="flex-fill"
+                  onClick={() => handleShowHistorial(orden)}
+                >
+                  <FaHistory className="me-1" />
+                  Historial
+                </Button>
               </div>
             </div>
           );

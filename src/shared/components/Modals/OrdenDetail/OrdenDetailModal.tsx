@@ -84,7 +84,7 @@ const OrdenDetailModal: React.FC<OrdenDetailModalProps> = ({
         <div className="orden-detail-section">
           <h5>Información de la Orden</h5>
           <div className="detail-row">
-            <strong>Folio#:</strong> {orden.notificacion.id}
+            <strong>Folio#:</strong> {orden.id}
           </div>
           <div className="detail-row">
             <strong>Fecha Estimada de Inicio:</strong> {formatearFecha(orden.fecha_inicio)}

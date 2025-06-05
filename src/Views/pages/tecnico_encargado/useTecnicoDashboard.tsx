@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { OrdenService } from '../../../core/services/Orden/OrdenService.service';
 import type { OrdenTrabajoSimplificada } from '../../../core/Models/Ordenes/ordenobtener.interface';
+import type { OrdenLlenado } from '../../../core/Models/Ordenes/Ordenllenado';
 
 export const useTecnico = () => {
   // Estados de paginación
@@ -27,6 +28,9 @@ export const useTecnico = () => {
   const [fechaDesde, setFechaDesde] = useState('');
   const [fechaHasta, setFechaHasta] = useState('');
   const [filtrosAplicados, setFiltrosAplicados] = useState(false);
+
+  const [showHistorialModal, setShowHistorialModal] = useState<boolean>(false);
+  const [selectedOrdenHistorial, setSelectedOrdenHistorial] = useState<OrdenTrabajoSimplificada | null>(null);
   
   // Estados de órdenes
       // Cambia los tipos de los estados
@@ -41,11 +45,54 @@ export const useTecnico = () => {
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
 const [selectedOrden, setSelectedOrden] = useState<OrdenTrabajoSimplificada | null>(null);
 
+ const [showSeguimientoModal, setShowSeguimientoModal] = useState<boolean>(false);
+  const [selectedOrdenSeguimiento, setSelectedOrdenSeguimiento] = useState<OrdenTrabajoSimplificada | null>(null);
+  const [tecnicos, setTecnicos] = useState<any[]>([]);
+  const [loadingTecnicos, setLoadingTecnicos] = useState<boolean>(false);
+
+ 
+
   // Instancia del servicio
   const ordenService = new OrdenService();
 
   // Calcular total de páginas
   const totalPages = Math.ceil((filtrosAplicados ? filteredOrdenes.length : totalItems) / itemsPerPage);
+
+  const handleShowSeguimiento = useCallback((orden: OrdenTrabajoSimplificada) => {
+    setSelectedOrdenSeguimiento(orden);
+    setShowSeguimientoModal(true);
+    // Cargar técnicos cuando se abre el modal
+    fetchTecnicos();
+  }, []);
+
+  const handleCloseSeguimientoModal = useCallback(() => {
+    setShowSeguimientoModal(false);
+    setSelectedOrdenSeguimiento(null);
+  }, []);
+
+  const fetchTecnicos = useCallback(async () => {
+    try {
+      setLoadingTecnicos(true);
+      const tecnicosData = await ordenService.obtenerTecnicos(); // Ajusta según tu servicio
+      setTecnicos(tecnicosData);
+    } catch (error) {
+      console.error('Error al cargar técnicos:', error);
+      setTecnicos([]);
+    } finally {
+      setLoadingTecnicos(false);
+    }
+  }, []);
+
+  const handleShowHistorial = useCallback((orden: OrdenTrabajoSimplificada) => {
+    setSelectedOrdenHistorial(orden);
+    setShowHistorialModal(true);
+  }, []);
+
+  const handleCloseHistorialModal = useCallback(() => {
+    setShowHistorialModal(false);
+    setSelectedOrdenHistorial(null);
+  }, []);
+
 
   // Cargar órdenes
   const fetchOrdenes = useCallback(async () => {
@@ -172,6 +219,53 @@ const [selectedOrden, setSelectedOrden] = useState<OrdenTrabajoSimplificada | nu
     }
   }, []);
 
+  const handleConfirmSeguimiento = useCallback(async (registros: any[]) => {
+    if (!selectedOrdenSeguimiento) {
+      console.error('No hay orden seleccionada');
+      return;
+    }
+
+    try {
+      setLoadingTecnicos(true); // Mostrar loading mientras se procesa
+      
+      // Transformar los registros del modal al formato que espera la API
+      const tecnicosParaAPI = registros.map(registro => ({
+        tecnico_id: registro.tecnicoId,
+        inicio_trabajo: new Date(registro.fechaInicio), // Convertir a formato ISO
+        fin_trabajo: new Date(registro.fechaFin)
+      }));
+
+      // Crear el objeto OrdenLlenado
+      const ordenLlenado: OrdenLlenado = {
+        orden_trabajo_id: selectedOrdenSeguimiento.id,
+        tecnicos: tecnicosParaAPI
+      };
+
+      console.log('Enviando datos a la API:', ordenLlenado);
+
+      // Llamar al método enviarDetalleOrden
+      const resultado = await ordenService.enviarDetalleOrden(ordenLlenado);
+      
+      console.log('Respuesta de la API:', resultado);
+
+      // Refrescar las órdenes después de guardar
+      await fetchOrdenes();
+      
+      // Cerrar el modal
+      handleCloseSeguimientoModal();
+      
+      // Opcional: mostrar mensaje de éxito
+      alert('Asignación de técnicos guardada correctamente');
+      
+    } catch (error) {
+      console.error('Error al guardar la asignación de técnicos:', error);
+      // Opcional: mostrar mensaje de error
+      alert('Error al guardar la asignación de técnicos');
+    } finally {
+      setLoadingTecnicos(false);
+    }
+  }, [selectedOrdenSeguimiento, fetchOrdenes, handleCloseSeguimientoModal]);
+
   const formatearFecha = useCallback((fecha: string): string => {
     if (!fecha) return 'N/A';
     try {
@@ -194,6 +288,11 @@ const [selectedOrden, setSelectedOrden] = useState<OrdenTrabajoSimplificada | nu
     totalPages,
     currentPage,
     showDetailModal,
+    showSeguimientoModal,
+    selectedOrdenSeguimiento,
+    tecnicos,
+    loadingTecnicos,
+    
     selectedOrden,
     estadoFiltro,
     fechaDesde,
@@ -208,11 +307,19 @@ const [selectedOrden, setSelectedOrden] = useState<OrdenTrabajoSimplificada | nu
     handleEstadoChange,
     handleFechaDesdeChange,
     handleFechaHastaChange,
+    handleShowSeguimiento,
+    handleCloseSeguimientoModal,
+    handleConfirmSeguimiento,
     handleApplyFilters,
     handleResetFilters,
     toggleViewMode,
     userOptions,
     stateOptions,
+    showHistorialModal,
+    selectedOrdenHistorial,
+    handleShowHistorial,
+    handleCloseHistorialModal,
+    
     
     // Utilidades
     getTipoCard,
@@ -222,3 +329,5 @@ const [selectedOrden, setSelectedOrden] = useState<OrdenTrabajoSimplificada | nu
     refetchOrdenes: fetchOrdenes
   };
 };
+
+

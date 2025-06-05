@@ -19,6 +19,7 @@ const ClienteDashboard: React.FC = () => {
     handlePageChange,
     handleShowDetails,
     handleCloseModal,
+    toggleViewMode,
     getTipoCard,
     formatearFecha,    // Opciones de estado
     userOptions,      // Opciones de usuario
@@ -33,7 +34,7 @@ const ClienteDashboard: React.FC = () => {
       <div className="dashboard-container" style={{ paddingTop: '90px' }}>
        <FiltersToolbar
           // Usuario (implementado como buscador)
-          showUserFilter={true}
+          showUserFilter={false}
           userOptions={userOptions}
           userFilterValue={userFilterValue}
           onUserFilterChange={handleUserFilterChange} stateOptions={[]} stateFilterValue={''} onStateFilterChange={function (): void {
@@ -46,7 +47,11 @@ const ClienteDashboard: React.FC = () => {
             throw new Error('Function not implemented.');
           } } onResetFilters={function (): void {
             throw new Error('Function not implemented.');
-          } } filtersApplied={false}        
+          } } filtersApplied={false}   
+          
+          showViewToggle={true}
+          viewMode={viewMode}
+          onViewModeChange={toggleViewMode}
         // ... otras props
       />
 

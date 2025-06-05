@@ -43,7 +43,7 @@ const Notificaciones: React.FC = () => {
   } = useNotificaciones();
 
   return (
-    <div className="container d-flex justify-content-center align-items-center min-vh-100 mt-5">
+    <div className="container d-flex justify-content-center align-items-center min-vh-100" style={{ paddingTop: '110px' }}>
       <div className="card shadow-sm" style={{width: '600px', maxWidth: '100%'}}>
         <div className="card-header text-white">
           <h4 className="mb-0 text-center">Notificación</h4>

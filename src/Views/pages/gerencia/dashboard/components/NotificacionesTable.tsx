@@ -95,12 +95,7 @@ const NotificacionesTable: React.FC<NotificacionesTableProps> = ({
                   notificacion.estado_notificacion !== 'cancelada' && 
                   notificacion.estado_notificacion !== 'aceptada' && (
                     <>
-                      <button 
-                        className="action-button change-status-button"
-                        onClick={() => handleOpenAceptarModal(notificacion)}
-                      >
-                        Cambiar estado
-                      </button>
+                      
                       <button 
                         className="action-button cancel-button"
                         onClick={() => handleOpenRechazarModal(notificacion)}

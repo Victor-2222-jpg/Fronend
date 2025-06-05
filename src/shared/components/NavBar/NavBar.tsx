@@ -48,7 +48,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-0">
             <li className="nav-item">
-              <Link className="nav-link" to="/tickets">GENERAR TICKETS</Link>
+              <Link className="nav-link" to="/tickets">GENERAR NOTIFICACIÓN</Link>
             </li>
             
             {/* Mostrar MIS ORDENES DE TRABAJO solo para roles 2 y 3 */}

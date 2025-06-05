@@ -1,21 +1,21 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { OrdenService } from '../../../../core/services/Orden/OrdenService.service';
 import type { OrdenTrabajo } from '../../../../core/Models/Ordenes/orden.interface';
 import type { Tecnico } from '../../../../core/Models/Ordenes/Tecnico.interface'; 
 
-
 export const useDashboardOrden = () => {
-  // Estados
-  const [ordenes, setOrdenes] = useState<OrdenTrabajo[]>([]);
+  // Estados para los datos - CAMBIO PRINCIPAL
+  const [allOrdenes, setAllOrdenes] = useState<OrdenTrabajo[]>([]); // ✅ Todas las órdenes
+  const [ordenesPaginadas, setOrdenesPaginadas] = useState<OrdenTrabajo[]>([]); // ✅ Órdenes paginadas
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   
-  // Paginación
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(1);
-  const itemsPerPage = 10;
+  // Estados para paginación - IGUAL QUE EN useDashboard
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const [itemsPerPage] = useState(15); // Cambiado de variable a constante
   
-  // Estados para modales
+  // Estados para modales (sin cambios)
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
   const [showEstadoModal, setShowEstadoModal] = useState<boolean>(false);
   const [showAsignacionModal, setShowAsignacionModal] = useState<boolean>(false);
@@ -26,6 +26,9 @@ export const useDashboardOrden = () => {
   const [tecnicos, setTecnicos] = useState<Tecnico[]>([]);
   const [loadingTecnicos, setLoadingTecnicos] = useState<boolean>(false);
 
+  // Calcular páginas totales - IGUAL QUE EN useDashboard
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
   const stateOptions = [
     { value: "todos", label: "Todos" },
     { value: "pendiente", label: "Pendiente" },
@@ -34,42 +37,76 @@ export const useDashboardOrden = () => {
     { value: "cancelada", label: "Cancelada" }
   ];
 
-  // Ejemplo de opciones de usuarios (estos deberían venir de tu estado)
   const userOptions = [
     { value: "1", label: "Juan Pérez" },
     { value: "2", label: "María García" },
     { value: "3", label: "Pedro Rodríguez" }
+
   ];
 
-  
   const ordenService = new OrdenService();
 
-  // Cargar órdenes
-            const fetchOrdenes = useCallback(async () => {
-        try {
-          setLoading(true);
-          const response = await ordenService.obtenerOrdenes();
-          
-          console.log('Response completa:', response);
-          
-          // Si response es un array, tomar el primer elemento
-          const apiResponse = Array.isArray(response) ? response[0] : response;
-          // Extraer el array de órdenes de la propiedad 'ordenesTrabajo'
-          const ordenesArray = apiResponse?.ordenesTrabajo || [];
-          
-          console.log('Órdenes extraídas:', ordenesArray);
-          console.log('Cantidad de órdenes:', ordenesArray.length);
-          
-          // Asegurar que sea un array válido
-          setOrdenes(Array.isArray(ordenesArray) ? ordenesArray : []);
-          setTotalPages(Math.ceil(ordenesArray.length / itemsPerPage));
-          setLoading(false);
-        } catch (err) {
-          setError('Error al cargar las órdenes de trabajo. Por favor, intente más tarde.');
-          setLoading(false);
-          console.error('Error fetching ordenes:', err);
-        }
-      }, [itemsPerPage]);
+  // ✅ CARGAR ÓRDENES - MISMA LÓGICA QUE fetchNotificaciones
+  const fetchOrdenes = useCallback(async () => {
+    try {
+      setLoading(true);
+      const response = await ordenService.obtenerOrdenes();
+      
+      console.log('Response completa:', response);
+      
+      // Si response es un array, tomar el primer elemento
+      const apiResponse = Array.isArray(response) ? response[0] : response;
+      // Extraer el array de órdenes de la propiedad 'ordenesTrabajo'
+      const ordenesArray = apiResponse?.ordenesTrabajo || [];
+      
+      console.log('Órdenes extraídas:', ordenesArray);
+      console.log('Cantidad total de órdenes:', ordenesArray.length);
+      
+      // ✅ GUARDAR TODAS LAS ÓRDENES Y ACTUALIZAR totalItems
+      setAllOrdenes(Array.isArray(ordenesArray) ? ordenesArray : []);
+      setTotalItems(ordenesArray.length);
+      
+      console.log(`Cargadas ${ordenesArray.length} órdenes`);
+      setError(null);
+    } catch (err) {
+      console.error('Error al obtener órdenes:', err);
+      setError('Error al cargar las órdenes de trabajo. Por favor, intente más tarde.');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // ✅ ACTUALIZAR ÓRDENES PAGINADAS - MISMA LÓGICA QUE EN useDashboard
+  useEffect(() => {
+    if (allOrdenes.length > 0) {
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = Math.min(startIndex + itemsPerPage, allOrdenes.length);
+      
+      const paginatedResults = allOrdenes.slice(startIndex, endIndex);
+      setOrdenesPaginadas(paginatedResults);
+      
+      console.log(`Página ${currentPage}: Mostrando ${startIndex + 1}-${endIndex} de ${allOrdenes.length}`);
+    } else {
+      setOrdenesPaginadas([]);
+    }
+  }, [allOrdenes, currentPage, itemsPerPage]);
+
+  // ✅ CARGAR ÓRDENES AL MONTAR - MISMA LÓGICA QUE EN useDashboard
+  const mountedRef = useRef(false);
+
+  useEffect(() => {
+    // Solo ejecutar si no se ha montado anteriormente
+    if (!mountedRef.current) {
+      fetchOrdenes();
+      mountedRef.current = true;
+    }
+  }, [fetchOrdenes]);
+
+  // ✅ MANEJAR CAMBIO DE PÁGINA - IGUAL QUE EN useDashboard
+  const handlePageChange = useCallback((newPage: number) => {
+    console.log(`Cambiando a página ${newPage}`);
+    setCurrentPage(newPage);
+  }, []);
 
   const fetchTecnicos = useCallback(async () => {
     try {
@@ -83,18 +120,6 @@ export const useDashboardOrden = () => {
       setLoadingTecnicos(false);
     }
   }, []);
-
-  useEffect(() => {
-    fetchOrdenes();
-  }, [fetchOrdenes]);
-
-  // Cambiar página
-  const handlePageChange = useCallback((page: number) => {
-    setCurrentPage(page);
-    
-  }, []);
-
-  
 
   // Formatear fecha
   const formatearFecha = useCallback((fechaStr: string) => {
@@ -135,14 +160,10 @@ export const useDashboardOrden = () => {
     setSelectedOrden(null);
   }, []);
 
-  
-const handleCloseAsignacionModal = useCallback(() => {
-  setShowAsignacionModal(false);
-  setSelectedOrdenAccion(null);
-}, []);
-
-
- 
+  const handleCloseAsignacionModal = useCallback(() => {
+    setShowAsignacionModal(false);
+    setSelectedOrdenAccion(null);
+  }, []);
 
   const handleOpenAprobarModal = useCallback((orden: OrdenTrabajo) => {
     setSelectedOrdenAccion(orden);
@@ -184,10 +205,10 @@ const handleCloseAsignacionModal = useCallback(() => {
       console.log(`Observaciones: ${observaciones || 'Ninguna'}`);
       
       // Aquí iría la lógica para cambiar el estado de la orden
-       await ordenService.obtenerOrdenesTecnico();
+      await ordenService.obtenerOrdenesTecnico();
       
-      // Actualizar localmente para reflejar el cambio
-      setOrdenes(prevOrdenes => 
+      // ✅ ACTUALIZAR TODAS LAS ÓRDENES, NO SOLO LAS PAGINADAS
+      setAllOrdenes(prevOrdenes => 
         prevOrdenes.map(orden => 
           orden.id === id 
             ? { ...orden, estado: nuevoEstado } 
@@ -208,50 +229,50 @@ const handleCloseAsignacionModal = useCallback(() => {
   }, [handleCloseEstadoModal]);
 
   const handleConfirmAsignacion = useCallback((
-  ordenId: number,
-  tecnicoId: number,
-  fechaInicio: string,
-  fechaFin: string
-) => {
-  try {
-    console.log(`Asignando técnico ${tecnicoId} a la orden ${ordenId}`);
-    console.log(`Fechas: ${fechaInicio} - ${fechaFin}`);
-    
-    // Actualizar localmente para reflejar el cambio
-    setOrdenes(prevOrdenes => 
-      prevOrdenes.map(orden => 
-        orden.id === ordenId 
-          ? { 
-              ...orden, 
-              estado: 'En Proceso',
-              tecnico_id: tecnicoId,
-              tecnico: {
-                id: tecnicoId,
-                nombre: tecnicos.find(t => t.id === tecnicoId)?.nombre || '',
-                numero_Telefono: tecnicos.find(t => t.id === tecnicoId)?.numero_Telefono || '',
-                // agrega otras propiedades requeridas por la interfaz Tecnico si es necesario
-              },
-              fecha_inicio: fechaInicio,
-              fecha_fin: fechaFin
-            } 
-          : orden
-      )
-    );
-    
-    // Cerrar modal
-    handleCloseAsignacionModal();
-    
-    // Mensaje de éxito
-    alert('Técnico asignado correctamente');
-    
-  } catch (error) {
-    console.error('Error al asignar técnico:', error);
-    alert('Ocurrió un error al asignar el técnico');
-  }
-}, [tecnicos, handleCloseAsignacionModal]);
+    ordenId: number,
+    tecnicoId: number,
+    fechaInicio: string,
+    fechaFin: string
+  ) => {
+    try {
+      console.log(`Asignando técnico ${tecnicoId} a la orden ${ordenId}`);
+      console.log(`Fechas: ${fechaInicio} - ${fechaFin}`);
+      
+      // ✅ ACTUALIZAR TODAS LAS ÓRDENES, NO SOLO LAS PAGINADAS
+      setAllOrdenes(prevOrdenes => 
+        prevOrdenes.map(orden => 
+          orden.id === ordenId 
+            ? { 
+                ...orden, 
+                estado: 'En Proceso',
+                tecnico_id: tecnicoId,
+                tecnico: {
+                  id: tecnicoId,
+                  nombre: tecnicos.find(t => t.id === tecnicoId)?.nombre || '',
+                  numero_Telefono: tecnicos.find(t => t.id === tecnicoId)?.numero_Telefono || '',
+                },
+                fecha_inicio: fechaInicio,
+                fecha_fin: fechaFin
+              } 
+            : orden
+        )
+      );
+      
+      // Cerrar modal
+      handleCloseAsignacionModal();
+      
+      // Mensaje de éxito
+      alert('Técnico asignado correctamente');
+      
+    } catch (error) {
+      console.error('Error al asignar técnico:', error);
+      alert('Ocurrió un error al asignar el técnico');
+    }
+  }, [tecnicos, handleCloseAsignacionModal]);
 
+  // ✅ RETORNAR LAS ÓRDENES PAGINADAS Y TOTALITEMS
   return {
-    ordenes,
+    ordenes: ordenesPaginadas, // ✅ Ahora devolvemos las órdenes paginadas
     loading,
     error,
     showEstadoModal,
@@ -268,14 +289,18 @@ const handleCloseAsignacionModal = useCallback(() => {
     getTipoCard,
     formatearFecha,
     currentPage,
+    totalPages, // ✅ Calculado correctamente desde totalItems
+    totalItems, // ✅ Agregar totalItems
     tecnicos,
     showAsignacionModal,
     loadingTecnicos,
-    totalPages,
     stateOptions,
     userOptions,
     handleCloseAsignacionModal,
     handleConfirmAsignacion,
-    handlePageChange
+    handlePageChange,
+    
+    // ✅ AGREGAR MÉTODO PARA REFRESCAR DATOS
+    refetchOrdenes: fetchOrdenes
   };
 };
