@@ -27,7 +27,7 @@ const OrdenHistorialModal: React.FC<OrdenHistorialProps> = ({
   const [historial, setHistorial] = useState<RegistroHistorialEditable[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [validated, setValidated] = useState(false);
+  const [ setValidated] = useState(false);
 
   const ordenService = new OrdenService();
 
